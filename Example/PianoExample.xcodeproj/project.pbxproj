@@ -12,7 +12,24 @@
 		106A37411F66EE0200BF5BD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106A373F1F66EE0200BF5BD1 /* Main.storyboard */; };
 		106A37431F66EE0200BF5BD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 106A37421F66EE0200BF5BD1 /* Assets.xcassets */; };
 		106A37461F66EE0200BF5BD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106A37441F66EE0200BF5BD1 /* LaunchScreen.storyboard */; };
+		10CCC0E01F6733CD0085294A /* Piano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CCC0DF1F6733C70085294A /* Piano.framework */; };
+		10CCC0E11F6733CD0085294A /* Piano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10CCC0DF1F6733C70085294A /* Piano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10CCC0E41F6737730085294A /* Sounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CCC0E31F6737730085294A /* Sounds.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		10CCC0D01F6728FA0085294A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				10CCC0E11F6733CD0085294A /* Piano.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		106A37381F66EE0200BF5BD1 /* PianoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PianoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +39,9 @@
 		106A37421F66EE0200BF5BD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		106A37451F66EE0200BF5BD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		106A37471F66EE0200BF5BD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10CCC0DF1F6733C70085294A /* Piano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Piano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		10CCC0E31F6737730085294A /* Sounds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sounds.xcassets; sourceTree = "<group>"; };
+		10CCC0E51F6738010085294A /* harp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = harp.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CCC0E01F6733CD0085294A /* Piano.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +61,7 @@
 			children = (
 				106A373A1F66EE0200BF5BD1 /* PianoExample */,
 				106A37391F66EE0200BF5BD1 /* Products */,
+				10CCC0C61F6712630085294A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +76,32 @@
 		106A373A1F66EE0200BF5BD1 /* PianoExample */ = {
 			isa = PBXGroup;
 			children = (
-				106A373B1F66EE0200BF5BD1 /* AppDelegate.swift */,
+				10CCC0E21F67350C0085294A /* Ignore */,
+				10CCC0E31F6737730085294A /* Sounds.xcassets */,
+				10CCC0E51F6738010085294A /* harp.wav */,
 				106A373D1F66EE0200BF5BD1 /* ViewController.swift */,
-				106A373F1F66EE0200BF5BD1 /* Main.storyboard */,
+			);
+			path = PianoExample;
+			sourceTree = "<group>";
+		};
+		10CCC0C61F6712630085294A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10CCC0DF1F6733C70085294A /* Piano.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		10CCC0E21F67350C0085294A /* Ignore */ = {
+			isa = PBXGroup;
+			children = (
 				106A37421F66EE0200BF5BD1 /* Assets.xcassets */,
+				106A373B1F66EE0200BF5BD1 /* AppDelegate.swift */,
+				106A373F1F66EE0200BF5BD1 /* Main.storyboard */,
 				106A37441F66EE0200BF5BD1 /* LaunchScreen.storyboard */,
 				106A37471F66EE0200BF5BD1 /* Info.plist */,
 			);
-			path = PianoExample;
+			name = Ignore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +114,7 @@
 				106A37341F66EE0200BF5BD1 /* Sources */,
 				106A37351F66EE0200BF5BD1 /* Frameworks */,
 				106A37361F66EE0200BF5BD1 /* Resources */,
+				10CCC0D01F6728FA0085294A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,6 +166,7 @@
 				106A37461F66EE0200BF5BD1 /* LaunchScreen.storyboard in Resources */,
 				106A37431F66EE0200BF5BD1 /* Assets.xcassets in Resources */,
 				106A37411F66EE0200BF5BD1 /* Main.storyboard in Resources */,
+				10CCC0E41F6737730085294A /* Sounds.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +316,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5M795QY47C;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = PianoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -289,6 +332,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5M795QY47C;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = PianoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
