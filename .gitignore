@@ -14,18 +14,18 @@ DerivedData
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+xcuserdata/
 
 ## Other
-xcuserdata
-*.xccheckout
 *.moved-aside
 *.xcuserstate
-*.xcbaseline
-*.xcbkptlist
+*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
+*.dSYM.zip
+*.dSYM
 
 # Swift Package Manager
 .build/
