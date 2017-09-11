@@ -11,6 +11,14 @@
 		106A36ED1F66ECC300BF5BD1 /* PianoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106A36EC1F66ECC300BF5BD1 /* PianoTests.swift */; };
 		106A36EF1F66ECC300BF5BD1 /* Piano.h in Headers */ = {isa = PBXBuildFile; fileRef = 106A36E11F66ECC300BF5BD1 /* Piano.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		106A36F91F66ECCF00BF5BD1 /* Piano.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106A36F81F66ECCF00BF5BD1 /* Piano.swift */; };
+		10CCC0E71F6747FA0085294A /* SystemSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0E61F6747FA0085294A /* SystemSound.swift */; };
+		10CCC0E91F6748340085294A /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0E81F6748340085294A /* Audio.swift */; };
+		10CCC0EB1F67484C0085294A /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0EA1F67484C0085294A /* Vibration.swift */; };
+		10CCC0ED1F6748600085294A /* TapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0EC1F6748600085294A /* TapticEngine.swift */; };
+		10CCC0EF1F6748760085294A /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0EE1F6748760085294A /* HapticFeedback.swift */; };
+		10CCC0F11F67488D0085294A /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0F01F67488D0085294A /* Note.swift */; };
+		10CCC0F31F6748E20085294A /* Piano+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0F21F6748E20085294A /* Piano+Error.swift */; };
+		10CCC0F51F6749FB0085294A /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCC0F41F6749FB0085294A /* UIDevice+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +39,14 @@
 		106A36EC1F66ECC300BF5BD1 /* PianoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTests.swift; sourceTree = "<group>"; };
 		106A36EE1F66ECC300BF5BD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		106A36F81F66ECCF00BF5BD1 /* Piano.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piano.swift; sourceTree = "<group>"; };
+		10CCC0E61F6747FA0085294A /* SystemSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSound.swift; sourceTree = "<group>"; };
+		10CCC0E81F6748340085294A /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		10CCC0EA1F67484C0085294A /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
+		10CCC0EC1F6748600085294A /* TapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapticEngine.swift; sourceTree = "<group>"; };
+		10CCC0EE1F6748760085294A /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
+		10CCC0F01F67488D0085294A /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		10CCC0F21F6748E20085294A /* Piano+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Piano+Error.swift"; sourceTree = "<group>"; };
+		10CCC0F41F6749FB0085294A /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +89,17 @@
 		106A36E01F66ECC300BF5BD1 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				106A36F81F66ECCF00BF5BD1 /* Piano.swift */,
-				106A36E11F66ECC300BF5BD1 /* Piano.h */,
 				106A36E21F66ECC300BF5BD1 /* Info.plist */,
+				106A36E11F66ECC300BF5BD1 /* Piano.h */,
+				106A36F81F66ECCF00BF5BD1 /* Piano.swift */,
+				10CCC0F21F6748E20085294A /* Piano+Error.swift */,
+				10CCC0F01F67488D0085294A /* Note.swift */,
+				10CCC0E61F6747FA0085294A /* SystemSound.swift */,
+				10CCC0E81F6748340085294A /* Audio.swift */,
+				10CCC0EA1F67484C0085294A /* Vibration.swift */,
+				10CCC0EC1F6748600085294A /* TapticEngine.swift */,
+				10CCC0EE1F6748760085294A /* HapticFeedback.swift */,
+				10CCC0F41F6749FB0085294A /* UIDevice+Extension.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -199,7 +223,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CCC0F31F6748E20085294A /* Piano+Error.swift in Sources */,
+				10CCC0EB1F67484C0085294A /* Vibration.swift in Sources */,
+				10CCC0E91F6748340085294A /* Audio.swift in Sources */,
+				10CCC0F11F67488D0085294A /* Note.swift in Sources */,
+				10CCC0F51F6749FB0085294A /* UIDevice+Extension.swift in Sources */,
+				10CCC0ED1F6748600085294A /* TapticEngine.swift in Sources */,
+				10CCC0E71F6747FA0085294A /* SystemSound.swift in Sources */,
 				106A36F91F66ECCF00BF5BD1 /* Piano.swift in Sources */,
+				10CCC0EF1F6748760085294A /* HapticFeedback.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
