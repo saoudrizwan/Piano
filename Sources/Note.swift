@@ -37,10 +37,10 @@ extension Piano {
         /// Second Generation Taptic Engine vibration options
         case hapticFeedback(HapticFeedback)
         
-        /// Tells Piano to pause the symphony until the current note is done playing
+        /// Tells Piano to wait until the current note is done playing before playing the next note
         case waitUntilFinished
         
-        /// Interval between sounds and/or vibrations
-        case pause(TimeInterval)
+        /// Tells Piano to wait a given duration before playing the next note
+        case wait(TimeInterval)
     }
 }

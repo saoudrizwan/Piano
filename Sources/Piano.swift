@@ -275,7 +275,7 @@ public class Piano {
                 music = { Piano.default.playHapticFeedback(feedback, completion: iterationCompletion) }
             case .waitUntilFinished:
                 break notesLoop
-            case .pause(let interval):
+            case .wait(let interval):
                 pauseDurationBeforeNextNote += interval
             }
             if let music = music {

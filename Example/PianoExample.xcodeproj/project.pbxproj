@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		105A40E11F675C690078BAA6 /* harp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 10CCC0E51F6738010085294A /* harp.wav */; };
+		105A40E21F675C690078BAA6 /* joy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 105A40E01F6756970078BAA6 /* joy.wav */; };
 		106A373C1F66EE0200BF5BD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106A373B1F66EE0200BF5BD1 /* AppDelegate.swift */; };
 		106A373E1F66EE0200BF5BD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106A373D1F66EE0200BF5BD1 /* ViewController.swift */; };
 		106A37411F66EE0200BF5BD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106A373F1F66EE0200BF5BD1 /* Main.storyboard */; };
@@ -32,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		105A40E01F6756970078BAA6 /* joy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = joy.wav; sourceTree = "<group>"; };
 		106A37381F66EE0200BF5BD1 /* PianoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PianoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		106A373B1F66EE0200BF5BD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		106A373D1F66EE0200BF5BD1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,9 +79,10 @@
 		106A373A1F66EE0200BF5BD1 /* PianoExample */ = {
 			isa = PBXGroup;
 			children = (
-				10CCC0E21F67350C0085294A /* Ignore */,
+				10CCC0E21F67350C0085294A /* IGNORE */,
 				10CCC0E31F6737730085294A /* Sounds.xcassets */,
 				10CCC0E51F6738010085294A /* harp.wav */,
+				105A40E01F6756970078BAA6 /* joy.wav */,
 				106A373D1F66EE0200BF5BD1 /* ViewController.swift */,
 			);
 			path = PianoExample;
@@ -92,7 +96,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		10CCC0E21F67350C0085294A /* Ignore */ = {
+		10CCC0E21F67350C0085294A /* IGNORE */ = {
 			isa = PBXGroup;
 			children = (
 				106A37421F66EE0200BF5BD1 /* Assets.xcassets */,
@@ -101,7 +105,7 @@
 				106A37441F66EE0200BF5BD1 /* LaunchScreen.storyboard */,
 				106A37471F66EE0200BF5BD1 /* Info.plist */,
 			);
-			name = Ignore;
+			name = IGNORE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +167,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				105A40E11F675C690078BAA6 /* harp.wav in Resources */,
+				105A40E21F675C690078BAA6 /* joy.wav in Resources */,
 				106A37461F66EE0200BF5BD1 /* LaunchScreen.storyboard in Resources */,
 				106A37431F66EE0200BF5BD1 /* Assets.xcassets in Resources */,
 				106A37411F66EE0200BF5BD1 /* Main.storyboard in Resources */,
