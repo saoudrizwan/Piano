@@ -15,12 +15,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var tableView: UITableView!
     
-    let cellData: [(title: String, rows: [(title: String, note: Piano.Note)])] = {
+    let cellData: [(title: String, rows: [(title: String, note: 🎹.Note)])] = {
         
         
         let sections = ["", "", "Vibration", "Taptic Engine", "Haptic Feedback - Notification", "Haptic Feedback - Impact", "Haptic Feedback - Selection", "Sound - Assets Example", "Sound - File Example", "Sound - URL Example", "Sound - System Predefined"]
         
-        var rows = [[(title: String, note: Piano.Note)]]()
+        var rows = [[(title: String, note: 🎹.Note)]]()
         for i in 0..<sections.count {
             switch i {
             case 0:
@@ -101,11 +101,11 @@ class ViewController: UIViewController {
                 // There's too many to manually code here, so let's use some Swift black magic
                 var z = 0
                 let sounds = AnyIterator {
-                    let next = withUnsafeBytes(of: &z) { $0.load(as: Piano.SystemSound.self) }
+                    let next = withUnsafeBytes(of: &z) { $0.load(as: 🎹.SystemSound.self) }
                     if next.hashValue != z { return nil }
                     z += 1
                     return next
-                } as AnyIterator<Piano.SystemSound>
+                } as AnyIterator<🎹.SystemSound>
                 for sound in sounds {
                     rows[10].append((title: ".sound(.system(.\(sound))", note: .sound(.system(sound))))
                 }
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
             default: break
             }
         }
-        var data = [(title: String, rows: [(title: String, note: Piano.Note)])]()
+        var data = [(title: String, rows: [(title: String, note: 🎹.Note)])]()
         for i in 0..<sections.count {
             let section = sections[i]
             let rows = rows[i]
@@ -133,22 +133,36 @@ class ViewController: UIViewController {
     
     var waitValue: TimeInterval? = nil
     
+    var pianoString: String = "" {
+        didSet {
+            if pianoString.characters.count == 0 {
+                label.textAlignment = .center
+                label.textColor = UIColor.gray
+                label.text = "Add some notes to your symphony"
+            } else {
+                label.textAlignment = .left
+                label.textColor = UIColor.black
+                label.text = pianoString
+            }
+        }
+    }
+    
+    var notesToPlay = [🎹.Note]()
+    
+    var notesToPlayAsStrings = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //let field = UITextField()
-        //self.view.addSubview(field)
-        //field.keyboardType = .numberPad
-        //field.becomeFirstResponder()
         
         title = "🎹 Piano"
         
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonTapped))
         navigationItem.setLeftBarButton(refreshButton, animated: false)
         
-        label.textAlignment = .center
-        label.textColor = UIColor.gray
-        label.text = "Add some notes to your symphony"
+        let undoButton = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(undoButtonTapped))
+        navigationItem.setRightBarButton(undoButton, animated: false)
+        
+        pianoString = ""
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let playButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playButtonTapped))
@@ -163,39 +177,95 @@ class ViewController: UIViewController {
             shadow.trailingAnchor.constraint(equalTo: toolBar.trailingAnchor),
             shadow.bottomAnchor.constraint(equalTo: toolBar.bottomAnchor)
             ])
+        let toolBarTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toolBarTapped))
+        toolBarTapGestureRecognizer.delegate = self
+        toolBar.addGestureRecognizer(toolBarTapGestureRecognizer)
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.keyboardDismissMode = .onDrag
         
+        label.adjustsFontSizeToFitWidth = true
+        label.lineBreakMode = .byTruncatingTail
+        label.allowsDefaultTighteningForTruncation = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    @objc func refreshButtonTapped() {
+        🎹.cancel()
+        waitTextField.resignFirstResponder()
+        notesToPlay.removeAll()
+        notesToPlayAsStrings.removeAll()
+        pianoString = ""
+    }
+    
+    @objc func undoButtonTapped() {
+        notesToPlay.removeLast()
+        notesToPlayAsStrings.removeLast()
+        setPianoStringToNotes()
+    }
+    
+    @objc func toolBarTapped(sender: UITapGestureRecognizer) {
+        tableView.setContentOffset(.zero, animated: true)
     }
     
     @objc func playButtonTapped() {
         waitTextField.resignFirstResponder()
-        print("play")
-    }
-    
-    @objc func refreshButtonTapped() {
-        waitTextField.resignFirstResponder()
-        print("redo")
-    }
-    
-    @objc func playThing() {
-        Piano.play([
-            .sound(.system(.beepBeep)),
-            .waitUntilFinished,
-            .sound(.system(.voicemail)),
-            .waitUntilFinished,
-            .tapticEngine(.failed),
-            .waitUntilFinished,
-            .tapticEngine(.failed),
-            .waitUntilFinished,
-            .sound(.system(.beginVideoRecord))
-        ]) {
-            print("symphony did complete")
+        if notesToPlay.count > 0 {
+            label.textColor = UIColor(red: 69.0/255.0, green: 241.0/255.0, blue: 126.0/255.0, alpha: 1.0)
+            🎹.play(notesToPlay) {
+                self.label.textColor = UIColor.black
+            }
         }
+        
+    }
+    
+    func cellTapped(indexPath: IndexPath) {
+        let data = cellData[indexPath.section].rows[indexPath.row]
+        switch data.note {
+        case .wait, .waitUntilFinished: break
+        default:
+            🎹.play([data.note])
+        }
+    }
+    
+    @objc func cellAddButtonTapped(sender: UIButton) {
+        waitTextField.resignFirstResponder()
+        guard let cell = sender.superview as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else { return }
+        let data = cellData[indexPath.section].rows[indexPath.row]
+        switch data.note {
+        case .wait:
+            let waitNote = 🎹.Note.wait(waitValue ?? 0)
+            let waitString = ".wait(\(waitValue ?? 0))"
+            notesToPlay.append(waitNote)
+            notesToPlayAsStrings.append(waitString)
+        default:
+            notesToPlay.append(data.note)
+            notesToPlayAsStrings.append(data.title)
+        }
+        setPianoStringToNotes()
+    }
+    
+    func setPianoStringToNotes() {
+        var entireCommandAsString = ""
+        for i in 0..<notesToPlayAsStrings.count {
+            if i == 0 {
+                entireCommandAsString.append("Piano.play([\n")
+            }
+            if i != notesToPlayAsStrings.count - 1 {
+                let noteToPlayAsString = notesToPlayAsStrings[i]
+                entireCommandAsString.append("        " + noteToPlayAsString + ",\n")
+            } else {
+                let noteToPlayAsString = notesToPlayAsStrings[i]
+                entireCommandAsString.append("        " + noteToPlayAsString + "\n")
+            }
+            if i == notesToPlayAsStrings.count - 1 {
+                entireCommandAsString.append("        ])")
+            }
+        }
+        pianoString = entireCommandAsString
     }
 }
 
@@ -205,7 +275,25 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return cellData[section].title
+        var title = cellData[section].title
+        
+        let unsupported = " (UNSUPPORTED)"
+        switch section {
+        case 3:
+            // Taptic Engine
+            if !UIDevice.current.hasTapticEngine {
+                title.append(unsupported)
+            }
+        case 4, 5, 6:
+            // Haptic Feedback
+            if !UIDevice.current.hasHapticFeedback {
+                title.append(unsupported)
+            }
+        default:
+            break
+        }
+        
+        return title
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -218,7 +306,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = data.title
         
         let addButton = UIButton(type: .contactAdd)
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(cellAddButtonTapped), for: .touchUpInside)
         
         cell.accessoryView = addButton
         
@@ -234,7 +322,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             waitTextField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
             
             let one = ".wait("
-            let two: String = (waitValue == nil) ? "tap to input" : "\(waitValue!)"
+            let two: String = (waitValue == nil) ? "tap to input seconds" : "\(waitValue!)"
             let three = ")"
             let attributedString = NSMutableAttributedString(string: one + two + three)
             attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: one.characters.count))
@@ -257,24 +345,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = cellData[indexPath.section].rows[indexPath.row]
-        
-        switch data.note {
-        case .wait:
-            break
-        default:
-             break
-        }
-        
-        
+        cellTapped(indexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    @objc func addButtonTapped(sender: UIButton) {
-        waitTextField.resignFirstResponder()
-        guard let cell = sender.superview as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else { return }
-        let data = cellData[indexPath.section].rows[indexPath.row]
-        print(data.title)
     }
 }
 
@@ -287,7 +359,7 @@ extension ViewController: UITextFieldDelegate {
             newString = newString.replacingOccurrences(of: ".wait(", with: "")
             newString = newString.replacingOccurrences(of: ".wait", with: "")
             newString = newString.replacingOccurrences(of: ")", with: "")
-            newString = newString.replacingOccurrences(of: "tap to input", with: "")
+            newString = newString.replacingOccurrences(of: "tap to input seconds", with: "")
             newString = newString.replacingOccurrences(of: " ", with: "")
             
             waitValue = TimeInterval(newString)
@@ -322,13 +394,23 @@ extension ViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == waitTextField {
             let one = ".wait("
-            let two: String = (waitValue == nil) ? "tap to input" : "\(waitValue!)"
+            let two: String = (waitValue == nil) ? "tap to input seconds" : "\(waitValue!)"
             let three = ")"
             let attributedString = NSMutableAttributedString(string: one + two + three)
             attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: one.characters.count))
             attributedString.addAttributes([.foregroundColor: UIColor.gray], range: NSRange(location: one.characters.count, length: two.characters.count))
             attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: one.characters.count + two.characters.count, length: three.characters.count))
             waitTextField.attributedText = attributedString
+        }
+    }
+}
+
+extension ViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let touchedView = touch.view, touchedView.isKind(of: UIControl.self) {
+            return false
+        } else {
+            return true
         }
     }
 }

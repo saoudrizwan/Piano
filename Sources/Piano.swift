@@ -233,6 +233,7 @@ public class Piano {
         cancel()
         Piano.default.symphonyCounter += 1
         var pauseDurationBeforeNextNote: TimeInterval = 0
+        let notes = Piano.default.removeConsecutiveDuplicateWaitUntilFinishes(from: notes)
         notesLoop: for i in 0..<notes.count {
             let note = notes[i]
             var music: (() -> Void)? = nil
@@ -250,6 +251,13 @@ public class Piano {
                             play(restOfNotes, completion: completion)
                         }
                     }
+                default: break
+                }
+            } else if (i < notes.count - 1) {
+                let nextNote = notes[i + 1]
+                switch nextNote {
+                case .waitUntilFinished:
+                    iterationCompletion = completion
                 default: break
                 }
             } else if i == notes.count - 1 {
@@ -274,7 +282,9 @@ public class Piano {
             case .hapticFeedback(let feedback):
                 music = { Piano.default.playHapticFeedback(feedback, completion: iterationCompletion) }
             case .waitUntilFinished:
-                break notesLoop
+                if i != 0 {
+                    break notesLoop
+                }
             case .wait(let interval):
                 pauseDurationBeforeNextNote += interval
             }
@@ -285,5 +295,40 @@ public class Piano {
                 Piano.default.timers.append(timer)
             }
         }
+        if notes.count == 0 {
+            completion?()
+        }
+    }
+    
+    /// Helper method for .play() to remove consecutive duplicate .waitUntileFinished
+    private func removeConsecutiveDuplicateWaitUntilFinishes(from notes: [Note]) -> [Note] {
+        var results = [Note]()
+        for note in notes {
+            if results.count == 0 {
+                results.append(note)
+            } else if let last = results.last {
+                switch note {
+                case .waitUntilFinished:
+                    switch last {
+                    case .waitUntilFinished:
+                        break
+                    default:
+                        results.append(note)
+                    }
+                default:
+                    results.append(note)
+                }
+            }
+        }
+        if results.count == 1 {
+            let onlyNote = results[0]
+            switch onlyNote {
+            case .waitUntilFinished:
+                return []
+            default:
+                break
+            }
+        }
+        return results
     }
 }

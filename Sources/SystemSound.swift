@@ -72,7 +72,6 @@ extension Piano {
         case ctCallWaiting = 1074
         case ctKeyTone2 = 1075
         case lock = 1100
-        case unlock = 1101
         case unlockFailed = 1102
         case tink = 1103
         case tock = 1104
