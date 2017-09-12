@@ -127,7 +127,7 @@ class ViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .decimalPad
         textField.delegate = self
-        //textField.borderStyle = .none
+        textField.borderStyle = .none
         return textField
     }()
     
@@ -421,15 +421,5 @@ extension ViewController {
         if let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(pauseCellIndexPath) {
             tableView.scrollToRow(at: pauseCellIndexPath, at: UITableViewScrollPosition.middle, animated: true)
         }
-    }
-}
-
-func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
-    var i = 0
-    return AnyIterator {
-        let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
-        if next.hashValue != i { return nil }
-        i += 1
-        return next
     }
 }
