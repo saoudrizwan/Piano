@@ -2,15 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:README.md">
-   </FileRef>
-   <FileRef
-      location = "group:LICENSE">
-   </FileRef>
-   <FileRef
       location = "group:Example/PianoExample.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Piano.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE">
    </FileRef>
 </Workspace>

@@ -5,7 +5,7 @@
 <p align="center">
     <img src="https://user-images.githubusercontent.com/7799382/30309920-bcdb85ec-9742-11e7-96fc-af8155f4712d.png" alt="Platform: iOS 10.0+" />
     <a href="https://developer.apple.com/swift" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30309908-ace5d886-9742-11e7-85ea-8d4e5f2af2ac.png" alt="Language: Swift 4" /></a>
-    <a href="https://cocoapods.org/pods/Piano" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30360773-34b19b40-9808-11e7-9c2f-2eeecca2880e.png" alt="CocoaPods compatible" /></a>
+    <a href="https://cocoapods.org/pods/Piano" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30369058-083b0c5c-9828-11e7-9fc3-536aaa07a132.png" alt="CocoaPods compatible" /></a>
     <a href="https://github.com/Carthage/Carthage" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30309900-9fc15d2e-9742-11e7-91fd-31bb1226db90.png" alt="Carthage compatible" /></a>
     <img src="https://user-images.githubusercontent.com/7799382/30309910-adef2b38-9742-11e7-8140-d05534dd92a5.png" alt="License: MIT" />
 </p>
@@ -13,15 +13,15 @@
 <p align="center">
     <a href="#installation">Installation</a>
   • <a href="#usage">Usage</a>
-  • <a href="#why-i-built-piano">Why I Built Piano</a>
   • <a href="#documentation">Documentation</a>
+  • <a href="#why-i-built-piano">Why I Built Piano</a>
   • <a href="#license">License</a>
   • <a href="#contribute">Contribute</a>
   • <a href="#questions">Questions?</a>
   • <a href="#credits">Credits</a>
 </p>
 
-Piano is a **delightful** and **easy-to-use** wrapper around the `AVFoundation` and `UIHapticFeedback` classes, leveraging the full capabilities of the **Taptic Engine**, while following strict Apple guidelines to **preserve battery life**. Ultimately, Piano allows you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
+Piano is a **convenient** and **easy-to-use** wrapper around the `AVFoundation` and `UIHapticFeedback` frameworks, leveraging the full capabilities of the **Taptic Engine**, while following strict Apple guidelines to **preserve battery life**. Ultimately, Piano allows you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
 
 
 ## Compatibility
@@ -37,7 +37,7 @@ platform :ios, '10.0'
 target 'ProjectName' do
 use_frameworks!
 
-    pod 'Piano', '~> 1.1'
+    pod 'Piano', '~> 1.2'
 
 end
 ```
@@ -75,7 +75,7 @@ Piano.play(symphony)
     .sound(.asset(name: "acapella"))
     ])
 ```
-Optionally add a completion block to be called for when all the notes are finished playing:
+Optionally add a completion block to be called when all the notes are finished playing:
 ```swift
 🎹.play([
     .sound(.asset(name: "acapella"))
@@ -148,9 +148,9 @@ Tells Piano to wait a given duration before playing the next note.
 
 * The iPhone 6S and 6S Plus carry the first generation of Taptic Engine which have a few "haptic" vibration patterns, which you can play with Piano using the `.tapticEngine()` notes.
 
-* The iPhone 7 and above carry the latest version of the Taptic Engine which supports the iOS 10 Haptic Feedback frameworks, allowing you to select from many more vibration types. You can access these vibrations using the `.hapticFeedback()` note.
+* The iPhone 7 and above carry the latest version of the Taptic Engine which supports the iOS 10 Haptic Feedback frameworks, allowing you to select from many more vibration types. You can play these vibrations using the `.hapticFeedback()` notes.
 
-* All versions of the iPhone can play the `.vibration()` note.
+* All versions of the iPhone can play the `.vibration()` notes.
 
 Piano also includes a useful extension for `UIDevice` to check if the user's device has a Taptic Engine and if it supports Haptic Feedback. This extension is especially useful for creating symphonies for all devices:
 ```swift
@@ -171,7 +171,7 @@ Apple's [guide over the Haptic Feedback framework](https://developer.apple.com/d
 ```swift
 Piano.wakeTapticEngine()
 ```
-This initializes and allocates the Haptic Feedback framework and essentially "wakes up" the Taptic Engine, as it is normally in an idle state.
+This initializes and allocates the Haptic Feedback framework and essentially "wakes up" the Taptic Engine, as it is normally in an idle state. `viewDidAppear()` is a good place to put this.
 
 #### 2. Prepare the Taptic Engine
 
@@ -189,24 +189,29 @@ tl;dr Call this method at the beginning of a gesture, in anticipation of playing
 ```swift
 Piano.putTapticEngineToSleep()
 ```
-Once we know we're done using the Taptic Engine, we can deallocate the Haptic Feedback framework, returning the Taptic Engine to its idle state.
+Once we know we're done using the Taptic Engine, we can deallocate the Haptic Feedback framework, returning the Taptic Engine to its idle state. `viewDidDissappear()` is a good place to put this.
 
-### But you don't have to
+#### But you don't have to.
 Piano automatically wakes and prepares the Taptic Engine when you call `.play([ ... ])` if it includes a `.hapticFeedback()` note, and returns the Taptic Engine back to sleep when the notes are done playing.
 
 ### The Example App
 
-The [example app](https://github.com/saoudrizwan/Piano/tree/master/Example) is a great place to get started. It's designed as a playground for you to compose and test out your own symphonies of sounds and vibrations. You can even drag and drop your own sound files into the project and tweak the code a bit to see how your own sounds can work alongside the Taptic Engine.
+The [example app](https://github.com/saoudrizwan/Piano/tree/master/Example) is a great place to get started. It's designed as a playground for you to compose and test out your own symphonies of sounds and vibrations.
 
-To add your own sound file, simply drag it into `Sounds.xcassets`, name it accordingly, then edit the `cellData` property in `ViewController.swift` (Scroll down to `case 7` in `cellData`, or look for "Add your own sound assets here..." in the Jump Bar using `Ctrl + 6`).
+<p align="center">
+<img src="https://user-images.githubusercontent.com/7799382/30370416-613f985a-982c-11e7-8646-33f1efb55d90.png" alt="Piano" width="300" height="500" />
+</p>
 
-## Why I Built Piano
-
-With the new iPhone 8 and iPhone X, we are going to see many new Augmented Reality apps, and one of the keypoints in the [Human Interface Guidelines for AR](https://developer.apple.com/ios/human-interface-guidelines/technologies/augmented-reality/) is to not clutter the AR view, allowing as much content from the augmented reality to be displayed as possible. Besides AR, Apple has spent tremendous time and manpower giving the iPhone an interface beyond our vision with the Taptic Engine and Siri. Apple even had a [session during WWDC 2017](https://developer.apple.com/videos/play/wwdc2017/803/) talking about the importance of sound design and the impact it can have on a user experience. It's obvious that the future of technology is not visual interfaces, but augmenting our connection with the real world. By using our physical, auditory, and most importantly visual senses, we can see the world in a whole new light. That's why I built Piano and [ARLogger](https://github.com/saoudrizwan/ARLogger), frameworks I hope will help developers create immersive and uncluttered interfaces, while keeping the user aware of the technology's state and purpose. If you'd like my help on an AR project, or just want to chat about the future of technology, don't hesitate to reach out to me on Twitter [@sdrzn](http://twitter.com/sdrzn).
+You can even drag and drop your own sound files into the project and tweak the code a bit to see how your own sounds can work alongside the Taptic Engine. To add your own sound file, simply drag it into `Sounds.xcassets`, name it accordingly, then edit the `cellData` property in `ViewController.swift` (Scroll down to `case 7` in `cellData`, or look for "Add your own sound assets here..." in the Jump Bar using `Ctrl + 6`).
 
 ## Documentation
 Option + click on any of Piano's methods or notes for detailed documentation.
 <img src="https://user-images.githubusercontent.com/7799382/30358465-97784ee0-97f9-11e7-9f12-75fa041cf556.png" alt="documentation">
+
+
+## Why I Built Piano
+
+With the new iPhone 8 and iPhone X, we are going to see many new Augmented Reality apps, and one of the keypoints in the [Human Interface Guidelines for AR](https://developer.apple.com/ios/human-interface-guidelines/technologies/augmented-reality/) is to not clutter the AR view, allowing as much content from the augmented reality to be displayed as possible. Besides AR, Apple has spent tremendous time and manpower giving the iPhone an interface beyond our vision with the Taptic Engine and Siri. Apple even had a [session during WWDC 2017](https://developer.apple.com/videos/play/wwdc2017/803/) talking about the importance of sound design and the impact it can have on a user experience. It's obvious that the future of technology is not visual interfaces, but augmenting our connection with the real world. By using our physical, auditory, and most importantly visual senses, we can see the world in a whole new light. That's why I built Piano and [ARLogger](https://github.com/saoudrizwan/ARLogger), frameworks I hope will help developers create immersive and uncluttered interfaces, while keeping the user aware of the technology's state and purpose. If you'd like my help on an AR project, or just want to chat about the future of technology, don't hesitate to reach out to me on Twitter [@sdrzn](http://twitter.com/sdrzn).
 
 ## License
 
