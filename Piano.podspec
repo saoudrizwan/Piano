@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Piano"
-  s.version      = "1.1"
+  s.version      = "1.2"
   s.summary      = "Compose a symphony of sounds and vibrations with Taptic Engine"
   s.description  = <<-DESC
     Piano is a delightful and easy-to-use wrapper around the AVFoundation and UIHapticFeedback classes, leveraging the full capabilities of the Taptic Engine, while following strict Apple guidelines to preserve battery life. Ultimately, Piano allows you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
