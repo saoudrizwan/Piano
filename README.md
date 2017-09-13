@@ -107,7 +107,7 @@ Plays standard vibrations available on all models of the iPhone.
 
 |Vibration | |
 |------------ | -------------|
-|`.default`  | Basic 1 second vibration |
+|`.default`  | Basic 1-second vibration |
 |`.alert`  | Two short consecutive vibrations |
 
 #### `.tapticEngine(TapticEngine)`
