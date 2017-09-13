@@ -186,11 +186,12 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.keyboardDismissMode = .onDrag
         
+        label.lineBreakMode = .byTruncatingMiddle
         label.adjustsFontSizeToFitWidth = true
-        label.lineBreakMode = .byTruncatingTail
-        label.allowsDefaultTighteningForTruncation = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        
     }
     
     @objc func refreshButtonTapped() {
@@ -250,22 +251,28 @@ class ViewController: UIViewController {
     
     func setPianoStringToNotes() {
         var entireCommandAsString = ""
+        var numberOfLines = 0
         for i in 0..<notesToPlayAsStrings.count {
             if i == 0 {
                 entireCommandAsString.append("Piano.play([\n")
+                numberOfLines += 1
             }
             if i != notesToPlayAsStrings.count - 1 {
                 let noteToPlayAsString = notesToPlayAsStrings[i]
                 entireCommandAsString.append("        " + noteToPlayAsString + ",\n")
+                numberOfLines += 1
             } else {
                 let noteToPlayAsString = notesToPlayAsStrings[i]
                 entireCommandAsString.append("        " + noteToPlayAsString + "\n")
+                numberOfLines += 1
             }
             if i == notesToPlayAsStrings.count - 1 {
                 entireCommandAsString.append("        ])")
+                numberOfLines += 1
             }
         }
         pianoString = entireCommandAsString
+        label.numberOfLines = numberOfLines
     }
 }
 

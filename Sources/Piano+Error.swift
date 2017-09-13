@@ -32,14 +32,14 @@ extension Piano {
         if let error = error as? PianoError {
             switch error {
             case .notFound(let name):
-                print("Piano could not find \(name)")
+                print("🎹 Piano could not find \(name)")
             case .couldNotPlay(let name):
-                print("Piano could not play \(name)")
+                print("🎹 Piano could not play \(name)")
             }
         } else {
             let error = error as NSError
             print("""
-                Piano encountered an error!
+                🎹 Piano encountered an error!
                 Domain: \(error.domain)
                 Code: \(error.code)
                 Description: \(error.localizedDescription)
