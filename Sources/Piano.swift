@@ -51,7 +51,7 @@ public class Piano {
     
     private init() { }
     
-    /// Initializes and allocates all the UIFeedbackGenerator concrete subclasses, waking up the Taptic Engine from an idle state.
+    /// Wakes up the Taptic Engine from an idle state
     public static func wakeTapticEngine() {
         if Piano.default.feedbackGenerator.notification == nil {
             Piano.default.feedbackGenerator = (notification: UINotificationFeedbackGenerator(),
@@ -62,6 +62,9 @@ public class Piano {
         }
     }
     
+    /// This tells the Taptic Engine to prepare itself before creating any feedback to reduce latency when triggering feedback. You can call this as many times as you want, preferrably right before playing a .hapticFeedback note.
+    ///
+    /// Apple docs:
     /// When you call this method, the generator is placed into a prepared state for a short period of time. While the generator is prepared, you can trigger feedback with lower latency.
     /// Think about when you can best prepare your generators. Call prepare() before the event that triggers feedback. The system needs time to prepare the Taptic Engine for minimal latency. Calling prepare() and then immediately triggering feedback (without any time in between) does not improve latency.
     /// To conserve power, the Taptic Engine returns to an idle state after any of the following events:
@@ -82,7 +85,7 @@ public class Piano {
         Piano.default.feedbackGenerator.impact.heavy?.prepare()
     }
     
-    /// If you no longer need a prepared UIFeedbackGenerator generator, remove all references to the generator object and let the system deallocate it. This lets the Taptic Engine return to its idle state.
+    /// Returns the Taptic Engine to an idle state.
     public static func putTapticEngineToSleep() {
         Piano.default.feedbackGenerator = (nil, (nil, nil, nil), nil)
     }
