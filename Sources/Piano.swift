@@ -326,7 +326,7 @@ public class Piano {
         }
     }
     
-    /// Helper method for .play() to remove consecutive duplicate .waitUntileFinished
+    /// Helper method for .play() to remove consecutive duplicate .waitUntileFinisheds
     private func removeConsecutiveDuplicateWaitUntilFinishes(from notes: [Note]) -> [Note] {
         var results = [Note]()
         for note in notes {

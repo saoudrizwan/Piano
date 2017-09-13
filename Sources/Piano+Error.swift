@@ -23,18 +23,20 @@
 import Foundation
 
 extension Piano {
+    /// Possible errors when trying to play notes
     public enum PianoError: Error {
         case notFound(String)
         case couldNotPlay(String)
     }
     
+    /// Currently, printing the errors in console is the most friendly way to handle them
     func handle(error: Error) {
         if let error = error as? PianoError {
             switch error {
             case .notFound(let name):
-                print("🎹 Piano could not find \(name)")
+                print("🎹 Piano could not find \(name)!")
             case .couldNotPlay(let name):
-                print("🎹 Piano could not play \(name)")
+                print("🎹 Piano could not play \(name)!")
             }
         } else {
             let error = error as NSError

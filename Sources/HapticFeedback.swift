@@ -22,34 +22,37 @@
 
 import Foundation
 
-/// Second Generation Taptic Engine vibration options
-public enum HapticFeedback {
-    /// Use notification feedback to communicate that a task or action has succeeded, failed, or produced a warning of some kind.
-    case notification(Notification)
-    public enum Notification {
-        /// Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed.
-        case success
+extension Piano {
+    /// Second Generation Taptic Engine vibration options
+    public enum HapticFeedback {
+        /// Use notification feedback to communicate that a task or action has succeeded, failed, or produced a warning of some kind.
+        case notification(Notification)
+        public enum Notification {
+            /// Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed.
+            case success
+            
+            /// Indicates that a task or action, such as depositing a check or unlocking a vehicle, has produced a warning of some kind.
+            case warning
+            
+            /// Indicates that a task or action, such as depositing a check or unlocking a vehicle, has failed.
+            case failure
+        }
         
-        /// Indicates that a task or action, such as depositing a check or unlocking a vehicle, has produced a warning of some kind.
-        case warning
+        /// Use impact feedback generators to indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place.
+        case impact(Impact)
+        public enum Impact {
+            /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
+            case light
+            
+            /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
+            case medium
+            
+            /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
+            case heavy
+        }
         
-        /// Indicates that a task or action, such as depositing a check or unlocking a vehicle, has failed.
-        case failure
+        /// Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection.
+        case selection
     }
-    
-    /// Use impact feedback generators to indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place.
-    case impact(Impact)
-    public enum Impact {
-        /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
-        case light
-        
-        /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
-        case medium
-        
-        /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
-        case heavy
-    }
-    
-    /// Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection.
-    case selection
 }
+
