@@ -21,12 +21,12 @@
   • <a href="#credits">Credits</a>
 </p>
 
-Piano is a **delightful** and **easy-to-use** wrapper around the `AVAudioServices` and `UIHapticFeedback` classes, leveraging the full capabilities of the **Taptic Engine**, while following strict Apple guidelines to **preserve battery life**. Ultimately, Piano allows you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
+Piano is a **delightful** and **easy-to-use** wrapper around the `AVFoundation` and `UIHapticFeedback` classes, leveraging the full capabilities of the **Taptic Engine**, while following strict Apple guidelines to **preserve battery life**. Ultimately, Piano allows you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
 
 
 ## Compatibility
 
-Piano requires **iOS 10+** and is compatible with **Swift 4** projects. Therefore you must use Xcode 9 when working with Piano.
+Piano requires **iOS 10+** and is compatible with **Swift 4** projects.
 
 ## Installation
 
@@ -152,7 +152,7 @@ Tells Piano to wait a given duration before playing the next note.
 
 * All versions of the iPhone can play the `.vibration()` note.
 
-Piano also includes a useful extension for `UIDevice` to check if the user's device has a Taptic Engine and if it supports Haptic Feedback. This extension is especially useful for creating Piano symphonies for all devices:
+Piano also includes a useful extension for `UIDevice` to check if the user's device has a Taptic Engine and if it supports Haptic Feedback. This extension is especially useful for creating symphonies for all devices:
 ```swift
 if UIDevice.current.hasHapticFeedback {
     // use .hapticFeedback(HapticFeedback) notes
