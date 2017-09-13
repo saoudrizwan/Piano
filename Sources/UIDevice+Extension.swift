@@ -25,44 +25,60 @@ import Foundation
 /// Device extension to check whether user's device supports Taptic Engine and/or Haptic Feedback
 /// Be sure to use with UIDevice.current
 public extension UIDevice {
-    public enum DevicePlatform: String {
-        case other = "Old Device"
-        case iPhone6S = "iPhone 6S"
-        case iPhone6SPlus = "iPhone 6S Plus"
-        case iPhone7 = "iPhone 7"
-        case iPhone7Plus = "iPhone 7 Plus"
+    /// In order to check if the iPhone has Taptic Engine and/or Haptic Feedback support, we need to check the device's model version. This function returns the generation and version of the current device.
+    /// Note: Simulators will return a result of (0, 0), resulting in the hasTapticEngine and hasHapticFeedback BOOLs returning false
+    /* Example:
+     "iPhone7,1" on iPhone 6 Plus -> (7, 1)
+     "iPhone7,2" on iPhone 6 -> (7, 2)
+     "iPhone8,1" on iPhone 6S -> (8, 1)
+     "iPhone8,2" on iPhone 6S Plus -> (8, 2)
+     "iPhone8,4" on iPhone SE -> (8, 4)
+     "iPhone9,1" on iPhone 7 (CDMA) -> (9, 1)
+     "iPhone9,3" on iPhone 7 (GSM) -> (9, 3)
+     "iPhone9,2" on iPhone 7 Plus (CDMA) -> (9, 2)
+     "iPhone9,4" on iPhone 7 Plus (GSM) -> (9, 4)
+     iPhone 8, 8S, and X will likely use a generation of 10 or greater, and will support Haptic Feedback, so this extension will work for those devices as well.
+     */
+    private func getDeviceGenerationVersion() -> (generation: Int, version: Int) {
+        var sysinfo = utsname()
+        uname(&sysinfo)
+        let platform = String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+        if platform.lowercased().prefix("iPhone".characters.count) != "iPhone".lowercased() { // Not an iPhone (probably simulator)
+            return (0, 0)
+        }
+        let numbers = platform.filter { "0123456789,".contains($0) }
+        let generation: Int = Int(String(numbers.characters.first ?? "0")) ?? 0
+        let version: Int = Int(String(numbers.characters.last ?? "0")) ?? 0
+        return (generation, version)
     }
     
-    public var platform: DevicePlatform {
+    // Returns a BOOL value representing whether the current device has a Taptic Engine or not
+    public var hasTapticEngine: Bool {
         get {
-            var sysinfo = utsname()
-            uname(&sysinfo)
-            let platform = String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
-            switch platform {
-            case "iPhone9,2", "iPhone9,4":
-                return .iPhone7Plus
-            case "iPhone9,1", "iPhone9,3":
-                return .iPhone7
-            case "iPhone8,2":
-                return .iPhone6SPlus
-            case "iPhone8,1":
-                return .iPhone6S
-            default:
-                return .other
+            let device = getDeviceGenerationVersion()
+            if device.generation == 8 {
+                if device.version == 4 { // SE
+                    return false
+                } else {
+                    return true
+                }
+            } else if device.generation > 8 {
+                return true
+            } else {
+                return false
             }
         }
     }
     
-    public var hasTapticEngine: Bool {
-        get {
-            return platform == .iPhone6S || platform == .iPhone6SPlus ||
-                platform == .iPhone7 || platform == .iPhone7Plus
-        }
-    }
-    
+    // Returns a BOOL value representing whether the current device has a Taptic Engine with Haptic Feedback support
     public var hasHapticFeedback: Bool {
         get {
-            return platform == .iPhone7 || platform == .iPhone7Plus
+            let device = getDeviceGenerationVersion()
+            if device.generation >= 9 {
+                return true
+            } else {
+                return false
+            }
         }
     }
 }
