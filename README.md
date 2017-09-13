@@ -95,12 +95,12 @@ In the background, each note has an internal completion block, so you can add a 
 #### `.sound(Audio)`
 Plays an audio file.
 
-Audio |
------------- | -------------
-`.asset(name: String)` | Name of asset in any .xcassets catalogs. It's recommended to add your sound files to Asset Catalogs instead of as standalone files to your main bundle.
-`.file(name: String, extension: String)` | Retrieves a file from the main bundle. For example a file named `Beep.wav` would be accessed with `.file(name: "Beep", extension: "wav")`.
-`.url(URL)` | This only works for file URLs, not network URLs.
-`.system(SystemSound)` | Predefined system sounds in every iPhone. [See all available options here](https://github.com/saoudrizwan/Piano/blob/master/Sources/SystemSound.swift).
+|Audio | |
+|------------ | ------------- |
+|`.asset(name: String)` | Name of asset in any .xcassets catalogs. It's recommended to add your sound files to Asset Catalogs instead of as standalone files to your main bundle.|
+|`.file(name: String, extension: String)` | Retrieves a file from the main bundle. For example a file named `Beep.wav`| would be accessed with `.file(name: "Beep", extension: "wav")`.|
+|`.url(URL)` | This only works for file URLs, not network URLs.|
+|`.system(SystemSound)` | Predefined system sounds in every iPhone. [See all available options here](https://github.com/saoudrizwan/Piano/blob/master/Sources/SystemSound.swift). |
 
 #### `.vibration(Vibration)`
 Plays standard vibrations available on all models of the iPhone.
@@ -126,18 +126,17 @@ Plays Taptic Engine Haptic Feedback available on the iPhone 7 and above.
 
 |HapticFeedback | | |
 |------------ | ------------- |------------- |
-|`.notification` | Use notification feedback to communicate that a task or action has succeeded, failed, or produced a warning of some kind. | |
-| | **Notification** | |
+|`.notification(Notification)` |  | |
+| | **Notification** | Communicate that a task or action has succeeded, failed, or produced a warning of some kind. |
 | | `.success` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
 | | `.warning` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
 | | `.failure` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
-|`.impact`  | Use impact feedback generators to indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
-| | **Impact** | |
+|`.impact(Impact)`  |  |
+| | **Impact** | Indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
 | | `.light` | Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
 | | `.medium` | Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
 | | `.heavy` | Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
-|`.selection` | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection. | |
-
+|`.selection` | | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection. |
 <sub>See: [Apple's Guidelines for using Haptic Feedback](https://developer.apple.com/ios/human-interface-guidelines/user-interaction/feedback/)</sub>
 
 #### `.waitUntilFinished`
