@@ -242,7 +242,7 @@ public class Piano {
         cancel()
         Piano.default.symphonyCounter += 1
         var pauseDurationBeforeNextNote: TimeInterval = 0
-        let notes = Piano.default.removeUnnecessaryWaitUntilFinishes(from: notes)
+        let notes = Piano.default.removeUnnecessaryNotes(from: notes)
         var completion = completion
         if notes.contains(where: { (note) -> Bool in
             switch note {
@@ -316,6 +316,9 @@ public class Piano {
                 }
             case .wait(let interval):
                 pauseDurationBeforeNextNote += interval
+                if i == notes.count - 1 {
+                    music = { iterationCompletion?() }
+                }
             }
             if let music = music {
                 let timer = Timer.scheduledTimer(withTimeInterval: pauseDurationBeforeNextNote, repeats: false, block: { (_) in
@@ -330,7 +333,7 @@ public class Piano {
     }
     
     /// Helper method for .play() to remove unnecessary .waitUntileFinisheds
-    private func removeUnnecessaryWaitUntilFinishes(from notes: [Note]) -> [Note] {
+    private func removeUnnecessaryNotes(from notes: [Note]) -> [Note] {
         var results = [Note]()
         for note in notes {
             if results.count == 0 {
@@ -339,23 +342,18 @@ public class Piano {
                 switch note {
                 case .waitUntilFinished:
                     switch last {
-                    case .waitUntilFinished:
-                        break
-                    default:
-                        results.append(note)
+                    case .waitUntilFinished: break
+                    default: results.append(note)
                     }
-                default:
-                    results.append(note)
+                default: results.append(note)
                 }
             }
         }
         if results.count == 1 {
             let onlyNote = results[0]
             switch onlyNote {
-            case .waitUntilFinished:
-                return []
-            default:
-                break
+            case .waitUntilFinished: return []
+            default: break
             }
         } else {
             var removedFirstWaits = false
