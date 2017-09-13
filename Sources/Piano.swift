@@ -51,7 +51,7 @@ public class Piano {
     
     private init() { }
     
-    /// Wakes up the Taptic Engine from an idle state
+    /// Wakes the Taptic Engine up from an idle state
     public static func wakeTapticEngine() {
         if Piano.default.feedbackGenerator.notification == nil {
             Piano.default.feedbackGenerator = (notification: UINotificationFeedbackGenerator(),
@@ -85,7 +85,7 @@ public class Piano {
         Piano.default.feedbackGenerator.impact.heavy?.prepare()
     }
     
-    /// Returns the Taptic Engine to an idle state.
+    /// Returns the Taptic Engine to an idle state
     public static func putTapticEngineToSleep() {
         Piano.default.feedbackGenerator = (nil, (nil, nil, nil), nil)
     }
@@ -200,13 +200,13 @@ public class Piano {
             switch notification {
             case .success:
                 Piano.default.feedbackGenerator.notification?.notificationOccurred(.success)
-                duration = 0.1957
+                duration = 0.2
             case .warning:
                 Piano.default.feedbackGenerator.notification?.notificationOccurred(.warning)
-                duration = 0.235
+                duration = 0.25
             case .failure:
                 Piano.default.feedbackGenerator.notification?.notificationOccurred(.error)
-                duration = 0.421
+                duration = 0.5
             }
         case .impact(let impact):
             switch impact {
@@ -217,10 +217,10 @@ public class Piano {
             case .heavy:
                 Piano.default.feedbackGenerator.impact.heavy?.impactOccurred()
             }
-            duration = 0.063
+            duration = 0.1
         case .selection:
             Piano.default.feedbackGenerator.selection?.selectionChanged()
-            duration = 0.0485
+            duration = 0.05
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
             completion?()
@@ -242,7 +242,7 @@ public class Piano {
         cancel()
         Piano.default.symphonyCounter += 1
         var pauseDurationBeforeNextNote: TimeInterval = 0
-        let notes = Piano.default.removeConsecutiveDuplicateWaitUntilFinishes(from: notes)
+        let notes = Piano.default.removeUnnecessaryWaitUntilFinishes(from: notes)
         var completion = completion
         if notes.contains(where: { (note) -> Bool in
             switch note {
@@ -329,8 +329,8 @@ public class Piano {
         }
     }
     
-    /// Helper method for .play() to remove consecutive duplicate .waitUntileFinisheds
-    private func removeConsecutiveDuplicateWaitUntilFinishes(from notes: [Note]) -> [Note] {
+    /// Helper method for .play() to remove unnecessary .waitUntileFinisheds
+    private func removeUnnecessaryWaitUntilFinishes(from notes: [Note]) -> [Note] {
         var results = [Note]()
         for note in notes {
             if results.count == 0 {
@@ -356,6 +356,19 @@ public class Piano {
                 return []
             default:
                 break
+            }
+        } else {
+            var removedFirstWaits = false
+            var removedLastWaits = false
+            while !removedFirstWaits || !removedLastWaits {
+                switch results.first! {
+                case .waitUntilFinished: results.removeFirst()
+                default: removedFirstWaits = true
+                }
+                switch results.last! {
+                case .waitUntilFinished: results.removeLast()
+                default: removedLastWaits = true
+                }
             }
         }
         return results
