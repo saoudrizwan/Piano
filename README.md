@@ -162,7 +162,7 @@ if UIDevice.current.hasHapticFeedback {
     // use .vibration(Vibration) notes
 }
 ```
-Note: This extension does not work on simulators, it will always return false.
+**Note:** This extension does not work on simulators, it will always return false.
 
 ### Taptic Engine Guide
 
