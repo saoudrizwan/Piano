@@ -105,38 +105,38 @@ Audio |
 #### `.vibration(Vibration)`
 Plays standard vibrations available on all models of the iPhone.
 
-Vibration |
------------- | -------------
-`.default`  | Basic 1 second vibration
-`.alert`  | Two short consecutive vibrations
+|Vibration | |
+|------------ | -------------|
+|`.default`  | Basic 1 second vibration |
+|`.alert`  | Two short consecutive vibrations |
 
 #### `.tapticEngine(TapticEngine)`
 Plays Taptic Engine vibrations available on the iPhone 6S and above.
 
-TapticEngine |
------------- | -------------
-`.peek`  | One weak boom
-`.pop`  | One strong boom
-`.cancelled`  | Three sequential weak booms
-`.tryAgain`  | One weak boom then one strong boom
-`.failed`  | Three sequential strong booms
+|TapticEngine | |
+| ------------ | ------------- |
+|`.peek` | One weak boom |
+|`.pop` | One strong boom |
+|`.cancelled` | Three sequential weak booms |
+|`.tryAgain` | One weak boom then one strong boom |
+|`.failed` | Three sequential strong booms |
 
 #### `.hapticFeedback(HapticFeedback)`
 Plays Taptic Engine Haptic Feedback available on the iPhone 7 and above.
 
-HapticFeedback |   |
------------- | -------------
-`.notification`  | Use notification feedback to communicate that a task or action has succeeded, failed, or produced a warning of some kind. |
- | **Notification** |
- | `.success`| Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed.
- | `.warning`| Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed.
- | `.failure`| Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed.
-`.impact`  | Use impact feedback generators to indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
- | **Impact** |
- | `.light`| Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
- | `.medium`| Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
- | `.heavy`| Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
-`.selection`  | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection. |
+|HapticFeedback | | |
+|------------ | ------------- |
+|`.notification` | Use notification feedback to communicate that a task or action has succeeded, failed, or produced a warning of some kind. | |
+| **Notification** |
+| | `.success`| Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
+| | `.warning`| Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
+| | `.failure`| Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
+|`.impact`  | Use impact feedback generators to indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
+| **Impact** |
+| | `.light`| Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
+| | `.medium`| Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
+| | `.heavy`| Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
+|`.selection` | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection. |
 
 <sub>See: [Apple's Guidelines for using Haptic Feedback](https://developer.apple.com/ios/human-interface-guidelines/user-interaction/feedback/)</sub>
 
@@ -154,14 +154,14 @@ Tells Piano to wait a given duration before playing the next note.
 
 * All versions of the iPhone can play the `.vibration()` note.
 
-Piano also includes a useful extension for UIDevice to check if the user's device has a Taptic Engine and if it supports Haptic Feedback. This extension is especially useful for creating Piano symphonies for all devices:
+Piano also includes a useful extension for `UIDevice` to check if the user's device has a Taptic Engine and if it supports Haptic Feedback. This extension is especially useful for creating Piano symphonies for all devices:
 ```swift
 if UIDevice.current.hasHapticFeedback {
-    // ... use .hapticFeedback(HapticFeedback) notes
+    // use .hapticFeedback(HapticFeedback) notes
 } else if UIDevice.current.hasTapticEngine {
-    // ... use .tapticEngine(TapticEngine) notes
+    // use .tapticEngine(TapticEngine) notes
 } else {
-    // ... use .vibration(Vibration) notes
+    // use .vibration(Vibration) notes
 }
 ```
 
