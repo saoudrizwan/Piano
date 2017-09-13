@@ -127,14 +127,14 @@ Plays Taptic Engine Haptic Feedback available on the iPhone 7 and above.
 |HapticFeedback | | |
 |------------ | ------------- |------------- |
 |`.notification(Notification)` | **Notification** | Communicate that a task or action has succeeded, failed, or produced a warning of some kind. |
-| | `.success` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
-| | `.warning` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
-| | `.failure` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
+| | `.success` | Indicates that a task or action has completed successfully. |
+| | `.warning` | Indicates that a task or action has produced a warning. |
+| | `.failure` | Indicates that a task or action has failed. |
 |`.impact(Impact)`  | **Impact** | Indicates that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
-| | `.light` | Provides a subtle physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
-| | `.medium` | Provides a noticeable physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
-| | `.heavy` | Provides a powerful physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
-|`.selection` | | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection. |
+| | `.light` | Provides a physical metaphor representing a collision between small, light user interface elements.|
+| | `.medium` | Provides a physical metaphor representing a collision between moderately sized user interface elements.|
+| | `.heavy` | Provides a physical metaphor representing a collision between large, heavy user interface elements.|
+|`.selection` | | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel.|
 
 <sub>See: [Apple's Guidelines for using Haptic Feedback](https://developer.apple.com/ios/human-interface-guidelines/user-interaction/feedback/)</sub>
 
@@ -146,7 +146,7 @@ Tells Piano to wait a given duration before playing the next note.
 
 ### Device Capabilities
 
-* The iPhone 6S and 6S Plus carry the first generation of Taptic Engine which have a few "haptic" vibration patterns, which you can play with Piano using the `.tapticEngine()` notes.
+* The iPhone 6S and 6S Plus carry the first generation of Taptic Engine which has a few "haptic" vibration patterns, which you can play with Piano using the `.tapticEngine()` notes.
 
 * The iPhone 7 and above carry the latest version of the Taptic Engine which supports the iOS 10 Haptic Feedback frameworks, allowing you to select from many more vibration types. You can play these vibrations using the `.hapticFeedback()` notes.
 

@@ -41,13 +41,13 @@ extension Piano {
         /// Use impact feedback generators to indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place.
         case impact(Impact)
         public enum Impact {
-            /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
+            /// Provides a physical metaphor representing a collision between small, light user interface elements. For example, the user might feel a thud when a view slides into place or two objects collide.
             case light
             
-            /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
+            /// Provides a physical metaphor representing a collision between moderately sized user interface elements. For example, the user might feel a thud when a view slides into place or two objects collide.
             case medium
             
-            /// Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide.
+            /// Provides a physical metaphor representing a collision between large, heavy user interface elements. For example, the user might feel a thud when a view slides into place or two objects collide.
             case heavy
         }
         
