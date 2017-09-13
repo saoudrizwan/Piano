@@ -126,17 +126,16 @@ Plays Taptic Engine Haptic Feedback available on the iPhone 7 and above.
 
 |HapticFeedback | | |
 |------------ | ------------- |------------- |
-|`.notification(Notification)` |  | |
-| | **Notification** | Communicate that a task or action has succeeded, failed, or produced a warning of some kind. |
+|`.notification(Notification)` | **Notification** | Communicate that a task or action has succeeded, failed, or produced a warning of some kind. |
 | | `.success` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
 | | `.warning` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
 | | `.failure` | Indicates that a task or action, such as depositing a check or unlocking a vehicle, has completed. |
-|`.impact(Impact)`  |  |
-| | **Impact** | Indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
+|`.impact(Impact)`  | **Impact** | Indicate that an impact has occurred. For example, you might trigger impact feedback when a user interface object collides with something or snaps into place. |
 | | `.light` | Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
 | | `.medium` | Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
 | | `.heavy` | Provides a physical metaphor that complements the visual experience. For example, the user might feel a thud when a view slides into place or two objects collide. |
 |`.selection` | | Indicates that the selection is actively changing. For example, the user feels light taps while scrolling a picker wheel. This feedback is intended for communicating movement through a series of discrete values, not making or confirming a selection. |
+
 <sub>See: [Apple's Guidelines for using Haptic Feedback](https://developer.apple.com/ios/human-interface-guidelines/user-interaction/feedback/)</sub>
 
 #### `.waitUntilFinished`
