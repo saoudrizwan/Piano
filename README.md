@@ -165,13 +165,13 @@ if UIDevice.current.hasHapticFeedback {
 
 ### Taptic Engine Guide
 
-Apple's [guide over the Haptic Feedback framework](https://developer.apple.com/documentation/uikit/uifeedbackgenerator) is very clear about using the Taptic Engine appropriately in order to prevent draining the user's device's battery life. Piano was built with this in mind, and handles most cases as efficiently as possible. But you can help preserve battery life further by calling these helper methods based on your specific needs.
+Apple's [guide over the Haptic Feedback framework](https://developer.apple.com/documentation/uikit/uifeedbackgenerator) is very clear about using the Taptic Engine appropriately in order to prevent draining the user's device's battery life. Piano was built with this in mind, and handles most cases as efficiently as possible. But you can help preserve battery life and reduce latency further by calling these helper methods based on your specific needs.
 
 #### 1. Wake up the Taptic Engine
 ```swift
 Piano.wakeTapticEngine()
 ```
-This initializes and allocates the Haptic Feedback framework and essentially "wakes up" the Taptic Engine, as it is normally in an idle state. `viewDidAppear()` is a good place to put this.
+This initializes and allocates the Haptic Feedback framework and essentially "wakes up" the Taptic Engine, as it is normally in an idle state. A good place to put this is at the begin state of a gesture or action, in anticipation of playing a `.hapticFeedback()` note.
 
 #### 2. Prepare the Taptic Engine
 
@@ -181,15 +181,15 @@ Piano.prepareTapticEngine()
 This tells the Taptic Engine to prepare itself before creating any feedback to reduce latency when triggering feedback.
 
 From Apple's [documentation](https://developer.apple.com/documentation/uikit/uifeedbackgenerator):
-> This is particularly important when trying to match feedback to sound or visual cues. To preserve power, the Taptic Engine stays in this state for only a short period of time (on the order of seconds), or until you next trigger feedback. Think about when and where you can best prepare your generators. If you call prepare and then immediately trigger feedback, the system won’t have enough time to get the Taptic Engine into the prepared state, and you may not see a reduction in latency. On the other hand, if you call prepare too early, the Taptic Engine may become idle again before you trigger feedback.
+> This is particularly important when trying to match feedback to sound or visual cues. To preserve power, the Taptic Engine stays in this prepared state for only a short period of time (on the order of seconds), or until you next trigger feedback. Think about when and where you can best prepare your generators. If you call prepare and then immediately trigger feedback, the system won’t have enough time to get the Taptic Engine into the prepared state, and you may not see a reduction in latency. On the other hand, if you call prepare too early, the Taptic Engine may become idle again before you trigger feedback.
 
-tl;dr Call this method at the beginning of a gesture, in anticipation of playing a `.hapticFeedback()` note.
+tl;dr A good place to put this is right after calling `.wakeTapticEngine()`, usually at the beginning of a gesture or action, in anticipation of playing a `.hapticFeedback()` note.
 
 #### 3. Put the Taptic Engine back to Sleep
 ```swift
 Piano.putTapticEngineToSleep()
 ```
-Once we know we're done using the Taptic Engine, we can deallocate the Haptic Feedback framework, returning the Taptic Engine to its idle state. `viewDidDissappear()` is a good place to put this.
+Once we know we're done using the Taptic Engine, we can deallocate the Haptic Feedback framework, returning the Taptic Engine to its idle state. A good place to put this is at the end of a finished, cancelled, or failed gesture or action.
 
 #### But you don't have to.
 Piano automatically wakes and prepares the Taptic Engine when you call `.play([ ... ])` if it includes a `.hapticFeedback()` note, and returns the Taptic Engine back to sleep when the notes are done playing.
