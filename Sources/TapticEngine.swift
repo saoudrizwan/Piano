@@ -34,7 +34,7 @@ extension Piano {
         /// Three sequential weak booms
         case cancelled = 1521
         
-        /// Week boom then strong boom
+        /// Weak boom then strong boom
         case tryAgain = 1102
         
         /// Three sequential strong booms

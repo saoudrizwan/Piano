@@ -25,7 +25,7 @@ import Foundation
 extension Piano {
     /// Standard vibrations available on all models of the iPhone
     public enum Vibration: Int {
-        /// Basic 1 second vibration
+        /// Basic 1-second vibration
         case `default` = 4095
         /// Two short consecutive vibrations
         case alert = 1011
