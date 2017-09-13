@@ -88,7 +88,7 @@ Or cancel the currently playing symphony:
 🎹.cancel()
 ```
 
-In the background, each note has an internal completion block, so you can add a `.waitUntilFinished` note that tells Piano to not play the next note until the currently playing note is done playing. This is useful for creating patterns of custom haptic feedback, besides the ones Apple predefined. This is also great for creating complex combinations of sound effects and vibrations.
+In the background, each note has an internal completion block, so you can add a `.waitUntilFinished` note that tells Piano to not play the next note until the previous note is done playing. This is useful for creating patterns of custom haptic feedback, besides the ones Apple predefined. This is also great for creating complex combinations of sound effects and vibrations.
 
 ### Notes
 
@@ -139,7 +139,7 @@ Plays Taptic Engine Haptic Feedback available on the iPhone 7 and above.
 <sub>See: [Apple's Guidelines for using Haptic Feedback](https://developer.apple.com/ios/human-interface-guidelines/user-interaction/feedback/)</sub>
 
 #### `.waitUntilFinished`
-Tells Piano to wait until the current note is done playing before playing the next note.
+Tells Piano to wait until the previous note is done playing before playing the next note.
 
 #### `.wait(TimeInterval)`
 Tells Piano to wait a given duration before playing the next note.
