@@ -25,6 +25,14 @@ class PianoTests: XCTestCase {
     }
     
     func testExample() {
+        Piano.play([
+            .sound(.asset(name: "acapella")),
+            .hapticFeedback(.impact(.light)),
+            .waitUntilFinished,
+            .hapticFeedback(.impact(.heavy)),
+            .wait(0.2),
+            .sound(.system(.chooChoo))
+            ])
         
         Piano.cancel()
     }
