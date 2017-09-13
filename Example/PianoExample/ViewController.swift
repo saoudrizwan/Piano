@@ -16,22 +16,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let cellData: [(title: String, rows: [(title: String, note: 🎹.Note)])] = {
-        
-        
         let sections = ["", "", "Vibration", "Taptic Engine", "Haptic Feedback - Notification", "Haptic Feedback - Impact", "Haptic Feedback - Selection", "Sound - Assets Example", "Sound - File Example", "Sound - URL Example", "Sound - System Predefined"]
         
         var rows = [[(title: String, note: 🎹.Note)]]()
         for i in 0..<sections.count {
             switch i {
             case 0:
+                // Wait
+                rows.append([
+                    (".wait(text goes here)", .wait(0))
+                    ])
+            case 1:
                 // Wait Until Finished
                 rows.append([
                     (".waitUntilFinished", .waitUntilFinished)
-                    ])
-            case 1:
-                // Pause
-                rows.append([
-                    (".wait(text goes here)", .wait(0))
                     ])
             case 2:
                 // Vibration
@@ -148,7 +146,6 @@ class ViewController: UIViewController {
     }
     
     var notesToPlay = [🎹.Note]()
-    
     var notesToPlayAsStrings = [String]()
     
     override func viewDidLoad() {
@@ -190,8 +187,6 @@ class ViewController: UIViewController {
         label.adjustsFontSizeToFitWidth = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        
     }
     
     @objc func refreshButtonTapped() {
@@ -203,6 +198,7 @@ class ViewController: UIViewController {
     }
     
     @objc func undoButtonTapped() {
+        waitTextField.resignFirstResponder()
         notesToPlay.removeLast()
         notesToPlayAsStrings.removeLast()
         setPianoStringToNotes()
@@ -210,6 +206,7 @@ class ViewController: UIViewController {
     
     @objc func toolBarTapped(sender: UITapGestureRecognizer) {
         tableView.setContentOffset(.zero, animated: true)
+        waitTextField.resignFirstResponder()
     }
     
     @objc func playButtonTapped() {
@@ -239,7 +236,7 @@ class ViewController: UIViewController {
         switch data.note {
         case .wait:
             let waitNote = 🎹.Note.wait(waitValue ?? 0)
-            let waitString = ".wait(\(waitValue ?? 0))"
+            let waitString = ".wait(\(waitValue ?? 0.0))"
             notesToPlay.append(waitNote)
             notesToPlayAsStrings.append(waitString)
         default:
@@ -314,10 +311,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let addButton = UIButton(type: .contactAdd)
         addButton.addTarget(self, action: #selector(cellAddButtonTapped), for: .touchUpInside)
-        
         cell.accessoryView = addButton
         
-        if indexPath.section == 1 { // Wait
+        if indexPath.section == 0 { // Wait
             cell.textLabel?.text = ""
             cell.contentView.addSubview(waitTextField)
             NSLayoutConstraint.activate([
@@ -424,9 +420,9 @@ extension ViewController: UIGestureRecognizerDelegate {
 
 extension ViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
-        let pauseCellIndexPath = IndexPath(row: 0, section: 1)
-        if let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(pauseCellIndexPath) {
-            tableView.scrollToRow(at: pauseCellIndexPath, at: UITableViewScrollPosition.middle, animated: true)
+        let waitCellIndexPath = IndexPath(row: 0, section: 0)
+        if let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(waitCellIndexPath) {
+            tableView.scrollToRow(at: waitCellIndexPath, at: UITableViewScrollPosition.middle, animated: true)
         }
     }
 }
