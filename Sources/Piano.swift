@@ -53,7 +53,13 @@ public class Piano {
     
     /// Initializes and allocates all the UIFeedbackGenerator concrete subclasses, waking up the Taptic Engine from an idle state.
     public static func wakeTapticEngine() {
-        Piano.default.feedbackGenerator = (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
+        if Piano.default.feedbackGenerator.notification == nil {
+            Piano.default.feedbackGenerator = (notification: UINotificationFeedbackGenerator(),
+                                               impact: (light: UIImpactFeedbackGenerator(style: .light),
+                                                        medium: UIImpactFeedbackGenerator(style: .medium),
+                                                        heavy: UIImpactFeedbackGenerator(style: .heavy)),
+                                               selection: UISelectionFeedbackGenerator())
+        }
     }
     
     /// When you call this method, the generator is placed into a prepared state for a short period of time. While the generator is prepared, you can trigger feedback with lower latency.
@@ -234,6 +240,26 @@ public class Piano {
         Piano.default.symphonyCounter += 1
         var pauseDurationBeforeNextNote: TimeInterval = 0
         let notes = Piano.default.removeConsecutiveDuplicateWaitUntilFinishes(from: notes)
+        var completion = completion
+        if notes.contains(where: { (note) -> Bool in
+            switch note {
+            case .hapticFeedback: return true
+            default: return false
+            }
+        }) {
+            prepareTapticEngine()
+            if let definedCompletion = completion {
+                let newCompletion: (() -> Void) = {
+                    definedCompletion()
+                    putTapticEngineToSleep()
+                }
+                completion = newCompletion
+            } else {
+                completion = {
+                    putTapticEngineToSleep()
+                }
+            }
+        }
         notesLoop: for i in 0..<notes.count {
             let note = notes[i]
             var music: (() -> Void)? = nil
