@@ -19,7 +19,7 @@
   • <a href="#credits">Credits</a>
 </p>
 
-Piano is a delightful and easy-to-use wrapper around the `AVAudioServices` and `UIHapticFeedback` classes, leveraging the full capabilities of the Taptic Engine, while following strict Apple guidelines to preserve battery life. Ultimately, Piano allowing you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
+Piano is a **delightful** and **easy-to-use** wrapper around the `AVAudioServices` and `UIHapticFeedback` classes, leveraging the full capabilities of the **Taptic Engine**, while following strict Apple guidelines to **preserve battery life**. Ultimately, Piano allows you, the composer, to conduct masterful symphonies of sounds and vibrations, and create a more immersive, usable and meaningful user experience in your app or game.
 
 
 ## Compatibility
@@ -57,11 +57,16 @@ And `import Piano` in the files you'd like to use it.
 Using Piano is simple. Here's an example:
 ```swift
 Piano.play([
-.
-])
+    .sound(.asset(name: "acapella")),
+    .hapticFeedback(.impact(.light)),
+    .waitUntilFinished,
+    .hapticFeedback(.impact(.heavy)),
+    .wait(0.2),
+    .sound(.system(.chooChoo))
+    ])
 ```
 
-Piano allows you to play a series of [`Note`s](). In the background, each note has a completion block, so you can even add a wait note that doesn't play the next note until the currently playing note is done playing. This is useful for creating patterns of custom haptic feedback, besides the ones Apple predefined. This is also great for creating complex sound effects with haptic feedback alongside it.
+Piano allows you to play a series of [`Note`s](https://github.com/saoudrizwan/Piano/blob/master/Sources/Note.swift). In the background, each note has a completion block, so you can add a `.waitUntilFinished` note that doesn't play the next note until the currently playing note is done playing. This is useful for creating patterns of custom haptic feedback, besides the ones Apple predefined. This is also great for creating complex combinations of sound effects with haptic feedback.
 
 ### Notes
 /// Audio file to play
@@ -82,26 +87,13 @@ case waitUntilFinished
 /// Tells Piano to wait a given duration before playing the next note
 case wait(TimeInterval)
 
-#### * sound(Audio)
-Plays a sound file defined using the `Audio` enum.
+.sound(Audio) |
+------------ |
+.asset(name: String) | Name of asset in any .xcassets catalogs. It's recommended to add your sound files to Asset Catalogs instead of as standalone files to your main bundle.
+file(name: String, extension: String) | Retrieves a file from the main bundle. For example a file named `Beep.wav` would be accessed with `.file(name: "Beep", extension: "wav")`.
+.url(URL) | **Note:** this only works for file URLs, not network URLs.
+system(SystemSound) | Predefined system sounds in every iPhone. [See all available options here](https://github.com/saoudrizwan/Piano/blob/master/Sources/SystemSound.swift).
 
-* asset(name: String)
-Name of asset in any .xcassets catalogs. It's recommended to add your sound files to Asset Catalogs instead of as standalone files to your main bundle.
-
-* case file(name: String, extension: String)
-If you do have sound files in your main bundle, you can access it this way. For example a file named `Beep.wav` would be accessed with `.file(name: "Beep", extension: "wav")`.
-
-* case url(URL)
-Note: this only works for file URLs, not network URLs.
-
-/// Predefined system sound included in all iPhones
-case system(SystemSound)
-
-
-
-*
-*
-*
 
 ### Device Capabilities
 
