@@ -87,12 +87,14 @@ case waitUntilFinished
 /// Tells Piano to wait a given duration before playing the next note
 case wait(TimeInterval)
 
-.sound(Audio) | Audio file to play.
+#### `.sound(Audio)`
+
+Audio enum cases | Description
 ------------ | -------------
-.asset(name: String) | Name of asset in any .xcassets catalogs. It's recommended to add your sound files to Asset Catalogs instead of as standalone files to your main bundle.
-file(name: String, extension: String) | Retrieves a file from the main bundle. For example a file named `Beep.wav` would be accessed with `.file(name: "Beep", extension: "wav")`.
-.url(URL) | **Note:** this only works for file URLs, not network URLs.
-system(SystemSound) | Predefined system sounds in every iPhone. [See all available options here](https://github.com/saoudrizwan/Piano/blob/master/Sources/SystemSound.swift).
+`.asset(name: String)` | Name of asset in any .xcassets catalogs. It's recommended to add your sound files to Asset Catalogs instead of as standalone files to your main bundle.
+`.file(name: String, extension: String)` | Retrieves a file from the main bundle. For example a file named `Beep.wav` would be accessed with `.file(name: "Beep", extension: "wav")`.
+`.url(URL)` | This only works for file URLs, not network URLs.
+`.system(SystemSound)` | Predefined system sounds in every iPhone. [See all available options here](https://github.com/saoudrizwan/Piano/blob/master/Sources/SystemSound.swift).
 
 
 ### Device Capabilities
