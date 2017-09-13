@@ -72,16 +72,18 @@ class ViewController: UIViewController {
                     (".sound(.asset(name: \"kiss\"))", .sound(.asset(name: "kiss"))),
                     (".sound(.asset(name: \"wink\"))", .sound(.asset(name: "wink")))
                     // MARK:-
-                    // MARK: You can add your own sound assets here...
+                    // MARK: Add your own sound assets here...
                     // MARK:-
+                    
                     ])
             case 8:
                 // Sound - File Example
                 rows.append([
                     (".sound(.asset(name: \"heart\"))", .sound(.file(name: "harp", extension: "wav")))
                     // MARK:-
-                    // MARK: You can add your own sound files here...
+                    // MARK: Add your own sound files here...
                     // MARK:-
+                    
                     ])
             case 9:
                 // Sound - URL Example
