@@ -256,15 +256,15 @@ class ViewController: UIViewController {
             }
             if i != notesToPlayAsStrings.count - 1 {
                 let noteToPlayAsString = notesToPlayAsStrings[i]
-                entireCommandAsString.append("        " + noteToPlayAsString + ",\n")
+                entireCommandAsString.append("    " + noteToPlayAsString + ",\n")
                 numberOfLines += 1
             } else {
                 let noteToPlayAsString = notesToPlayAsStrings[i]
-                entireCommandAsString.append("        " + noteToPlayAsString + "\n")
+                entireCommandAsString.append("    " + noteToPlayAsString + "\n")
                 numberOfLines += 1
             }
             if i == notesToPlayAsStrings.count - 1 {
-                entireCommandAsString.append("        ])")
+                entireCommandAsString.append("    ])")
                 numberOfLines += 1
             }
         }
