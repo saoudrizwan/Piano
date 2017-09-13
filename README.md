@@ -5,7 +5,7 @@
 <p align="center">
     <img src="https://user-images.githubusercontent.com/7799382/30309920-bcdb85ec-9742-11e7-96fc-af8155f4712d.png" alt="Platform: iOS 10.0+" />
     <a href="https://developer.apple.com/swift" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30309908-ace5d886-9742-11e7-85ea-8d4e5f2af2ac.png" alt="Language: Swift 4" /></a>
-    <a href="https://cocoapods.org/pods/Piano" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30369058-083b0c5c-9828-11e7-9fc3-536aaa07a132.png" alt="CocoaPods compatible" /></a>
+    <a href="https://cocoapods.org/pods/Piano" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30373976-12d373ba-9838-11e7-9c94-c3bbb5ce4ea1.png" alt="CocoaPods compatible" /></a>
     <a href="https://github.com/Carthage/Carthage" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30309900-9fc15d2e-9742-11e7-91fd-31bb1226db90.png" alt="Carthage compatible" /></a>
     <img src="https://user-images.githubusercontent.com/7799382/30309910-adef2b38-9742-11e7-8140-d05534dd92a5.png" alt="License: MIT" />
 </p>
@@ -37,7 +37,7 @@ platform :ios, '10.0'
 target 'ProjectName' do
 use_frameworks!
 
-    pod 'Piano', '~> 1.2'
+    pod 'Piano', '~> 1.3'
 
 end
 ```
