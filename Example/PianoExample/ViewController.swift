@@ -135,7 +135,7 @@ class ViewController: UIViewController {
     
     var pianoString: String = "" {
         didSet {
-            if pianoString.characters.count == 0 {
+            if pianoString.count == 0 {
                 label.textAlignment = .center
                 label.textColor = UIColor.gray
                 label.text = "Add some notes to your symphony"
@@ -330,9 +330,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             let two: String = (waitValue == nil) ? "tap to input seconds" : "\(waitValue!)"
             let three = ")"
             let attributedString = NSMutableAttributedString(string: one + two + three)
-            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: one.characters.count))
-            attributedString.addAttributes([.foregroundColor: UIColor.lightGray], range: NSRange(location: one.characters.count, length: two.characters.count))
-            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: one.characters.count + two.characters.count, length: three.characters.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: one.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.lightGray], range: NSRange(location: one.count, length: two.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: one.count + two.count, length: three.count))
             waitTextField.attributedText = attributedString
         } else {
             if cell.contentView.subviews.contains(waitTextField) {
@@ -371,7 +371,7 @@ extension ViewController: UITextFieldDelegate {
             
             newString = ".wait(" + newString + ")"
             let attributedString = NSMutableAttributedString(string: newString)
-            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: newString.characters.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: newString.count))
             waitTextField.attributedText = attributedString
             
             if let newPosition = textField.position(from: textField.endOfDocument, offset: -1) {
@@ -387,7 +387,7 @@ extension ViewController: UITextFieldDelegate {
         if textField == waitTextField {
             let string = ".wait(" + ((waitValue == nil) ? "" : "\(waitValue!)") + ")"
             let attributedString = NSMutableAttributedString(string: string)
-            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: string.characters.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: string.count))
             waitTextField.attributedText = attributedString
             
             if let newPosition = textField.position(from: textField.endOfDocument, offset: -1) {
@@ -402,9 +402,9 @@ extension ViewController: UITextFieldDelegate {
             let two: String = (waitValue == nil) ? "tap to input seconds" : "\(waitValue!)"
             let three = ")"
             let attributedString = NSMutableAttributedString(string: one + two + three)
-            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: one.characters.count))
-            attributedString.addAttributes([.foregroundColor: UIColor.gray], range: NSRange(location: one.characters.count, length: two.characters.count))
-            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: one.characters.count + two.characters.count, length: three.characters.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: 0, length: one.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.gray], range: NSRange(location: one.count, length: two.count))
+            attributedString.addAttributes([.foregroundColor: UIColor.black], range: NSRange(location: one.count + two.count, length: three.count))
             waitTextField.attributedText = attributedString
         }
     }
