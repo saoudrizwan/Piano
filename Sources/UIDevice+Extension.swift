@@ -38,18 +38,27 @@ public extension UIDevice {
      "iPhone9,2" on iPhone 7 Plus (CDMA) -> (9, 2)
      "iPhone9,4" on iPhone 7 Plus (GSM) -> (9, 4)
      iPhone 8, 8S, and X will likely use a generation of 10 or greater, and will support Haptic Feedback, so this extension will work for those devices as well.
+     iPhone X -> iPhone10,6
      */
     private func getDeviceGenerationVersion() -> (generation: Int, version: Int) {
         var sysinfo = utsname()
         uname(&sysinfo)
         let platform = String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
-        if platform.lowercased().prefix("iPhone".characters.count) != "iPhone".lowercased() { // Not an iPhone (probably simulator)
+        if platform.lowercased().prefix("iPhone".count) != "iPhone".lowercased() { // Not an iPhone (probably simulator)
             return (0, 0)
         }
         let numbers = platform.filter { "0123456789,".contains($0) }
-        let generation: Int = Int(String(numbers.characters.first ?? "0")) ?? 0
-        let version: Int = Int(String(numbers.characters.last ?? "0")) ?? 0
-        return (generation, version)
+        if let commaIndex = numbers.index(of: ",") {
+            let firstNumber = numbers[numbers.startIndex..<commaIndex]
+            let afterCommaIndex = numbers.index(after: commaIndex)
+            let secondNumber = numbers[afterCommaIndex..<numbers.endIndex] // endIndex is an index after the last index
+            // print("Numbers: \(numbers), First: \(firstNumber), Second: \(secondNumber)")
+            let generation = Int(firstNumber) ?? 0
+            let version = Int(secondNumber) ?? 0
+            return (generation, version)
+        } else {
+            return (0, 0)
+        }
     }
     
     // Returns a BOOL value representing whether the current device has a Taptic Engine or not
@@ -74,6 +83,7 @@ public extension UIDevice {
     public var hasHapticFeedback: Bool {
         get {
             let device = getDeviceGenerationVersion()
+            print(device)
             if device.generation >= 9 {
                 return true
             } else {
