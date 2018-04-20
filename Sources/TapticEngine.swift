@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// First generation Taptic Engine vibrations
     public enum TapticEngine: Int {

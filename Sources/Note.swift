@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// Sound, feedback, vibration, or pause for Piano to play
     public enum Note {

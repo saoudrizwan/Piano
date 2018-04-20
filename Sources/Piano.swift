@@ -24,11 +24,13 @@ import Foundation
 import AudioToolbox.AudioServices
 import AVFoundation
 
+@available(iOS 10.0, *)
 public typealias 🎹 = Piano
 
 /// Piano
 ///
 /// Compose a symphony of sounds and vibrations using Taptic Engine
+@available(iOS 10.0, *)
 public class Piano {
     
     /// Internal instance of Piano to manage shared feedback generators and symphony trackers

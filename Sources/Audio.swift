@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// Audio file to play
     public enum Audio {

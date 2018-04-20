@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// Second Generation Taptic Engine vibration options
     public enum HapticFeedback {

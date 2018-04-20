@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// Possible errors when trying to play notes
     public enum PianoError: Error {

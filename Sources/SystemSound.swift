@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// Default system sounds predefined and available on all iPhones
     /// Source: http://iphonedevwiki.net/index.php/AudioServices

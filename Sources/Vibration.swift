@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(iOS 10.0, *)
 extension Piano {
     /// Standard vibrations available on all models of the iPhone
     public enum Vibration: Int {
