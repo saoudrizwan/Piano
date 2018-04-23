@@ -52,7 +52,6 @@ public extension UIDevice {
             let firstNumber = numbers[numbers.startIndex..<commaIndex]
             let afterCommaIndex = numbers.index(after: commaIndex)
             let secondNumber = numbers[afterCommaIndex..<numbers.endIndex] // endIndex is an index after the last index
-            // print("Numbers: \(numbers), First: \(firstNumber), Second: \(secondNumber)")
             let generation = Int(firstNumber) ?? 0
             let version = Int(secondNumber) ?? 0
             return (generation, version)
@@ -83,7 +82,6 @@ public extension UIDevice {
     public var hasHapticFeedback: Bool {
         get {
             let device = getDeviceGenerationVersion()
-            print(device)
             if device.generation >= 9 {
                 return true
             } else {
