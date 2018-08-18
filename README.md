@@ -37,7 +37,7 @@ platform :ios, '10.0'
 target 'ProjectName' do
 use_frameworks!
 
-    pod 'Piano', '~> 1.5'
+    pod 'Piano', '~> 1.7'
 
 end
 ```
