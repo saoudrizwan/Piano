@@ -50,7 +50,18 @@ public class Piano {
     
     /// Holds all the scheduled Timers with music
     private var timers = [Timer]()
-    
+
+    /// Handle allowing developers to set the sound playback category
+    public static var sessionCategory: String {
+        get {
+            return Piano.default.audioPlayerSessionCategory
+        }
+        set {
+            Piano.default.audioPlayerSessionCategory = newValue
+        }
+    }
+    private var audioPlayerSessionCategory = AVAudioSessionCategoryAmbient
+
     private init() { }
     
     /// Wakes the Taptic Engine up from an idle state
@@ -104,7 +115,7 @@ public class Piano {
             return
         }
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(audioPlayerSessionCategory)
             try AVAudioSession.sharedInstance().setActive(true)
             player = try AVAudioPlayer(data: asset.data, fileTypeHint: nil)
             if let player = player {
@@ -134,7 +145,7 @@ public class Piano {
             return
         }
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(audioPlayerSessionCategory)
             try AVAudioSession.sharedInstance().setActive(true)
             player = try AVAudioPlayer(contentsOf: url)
             if let player = player {
@@ -159,7 +170,7 @@ public class Piano {
     ///   - completion: completion handler
     private func playAudio(from url: URL, completion: (() -> Void)?) {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(audioPlayerSessionCategory)
             try AVAudioSession.sharedInstance().setActive(true)
             player = try AVAudioPlayer(contentsOf: url)
             if let player = player {
