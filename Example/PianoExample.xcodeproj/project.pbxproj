@@ -17,6 +17,7 @@
 		10CCC0E01F6733CD0085294A /* Piano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CCC0DF1F6733C70085294A /* Piano.framework */; };
 		10CCC0E11F6733CD0085294A /* Piano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10CCC0DF1F6733C70085294A /* Piano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		10CCC0E41F6737730085294A /* Sounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CCC0E31F6737730085294A /* Sounds.xcassets */; };
+		DA4BC02E2162AB77006C5ADF /* ResponsiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4BC02D2162AB77006C5ADF /* ResponsiveLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		10CCC0DF1F6733C70085294A /* Piano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Piano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10CCC0E31F6737730085294A /* Sounds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sounds.xcassets; sourceTree = "<group>"; };
 		10CCC0E51F6738010085294A /* harp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = harp.wav; sourceTree = "<group>"; };
+		DA4BC02D2162AB77006C5ADF /* ResponsiveLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				106A373F1F66EE0200BF5BD1 /* Main.storyboard */,
 				106A37441F66EE0200BF5BD1 /* LaunchScreen.storyboard */,
 				106A37471F66EE0200BF5BD1 /* Info.plist */,
+				DA4BC02D2162AB77006C5ADF /* ResponsiveLabel.swift */,
 			);
 			name = IGNORE;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			files = (
 				106A373E1F66EE0200BF5BD1 /* ViewController.swift in Sources */,
 				106A373C1F66EE0200BF5BD1 /* AppDelegate.swift in Sources */,
+				DA4BC02E2162AB77006C5ADF /* ResponsiveLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LR7NY5NPR9;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = PianoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
@@ -339,7 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LR7NY5NPR9;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = PianoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;

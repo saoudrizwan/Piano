@@ -26,7 +26,7 @@ import Foundation
 extension Piano {
     /// Default system sounds predefined and available on all iPhones
     /// Source: http://iphonedevwiki.net/index.php/AudioServices
-    public enum SystemSound: Int {
+    public enum SystemSound: Int, CaseIterable {
         case newMail = 1000
         case mailSent = 1001
         case voicemail = 1002

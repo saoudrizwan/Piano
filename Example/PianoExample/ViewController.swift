@@ -11,7 +11,7 @@ import Piano
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var label: ResponsiveLabel!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -99,6 +99,10 @@ class ViewController: UIViewController {
                     (".sound(.system(.voicemail))", .sound(.system(.voicemail)))
                     ])
                 // There's too many to manually code here, so let's use some Swift black magic
+                Piano.SystemSound.allCases.forEach {
+                    rows[10].append((title: ".sound(.system(.\($0))", note: .sound(.system($0))))
+                }
+                /*
                 var z = 0
                 let sounds = AnyIterator {
                     let next = withUnsafeBytes(of: &z) { $0.load(as: 🎹.SystemSound.self) }
@@ -109,6 +113,7 @@ class ViewController: UIViewController {
                 for sound in sounds {
                     rows[10].append((title: ".sound(.system(.\(sound))", note: .sound(.system(sound))))
                 }
+                 */
                 rows[10].removeSubrange(0..<3) // remove the first three we created as an example
             default: break
             }
@@ -180,6 +185,11 @@ class ViewController: UIViewController {
         toolBarTapGestureRecognizer.delegate = self
         toolBar.addGestureRecognizer(toolBarTapGestureRecognizer)
         
+        let labelLongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(labelLongPressed))
+        labelLongPressGestureRecognizer.minimumPressDuration = 0.3
+        labelLongPressGestureRecognizer.delegate = self
+        label.addGestureRecognizer(labelLongPressGestureRecognizer)
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         tableView.dataSource = self
         tableView.delegate = self
@@ -209,6 +219,22 @@ class ViewController: UIViewController {
     @objc func toolBarTapped(sender: UITapGestureRecognizer) {
         tableView.setContentOffset(.zero, animated: true)
         waitTextField.resignFirstResponder()
+    }
+    
+    @objc func labelLongPressed(sender: UILongPressGestureRecognizer) {
+        guard sender.state == .began, let senderView = sender.view, let superView = sender.view?.superview else { return }
+        senderView.becomeFirstResponder()
+        let copyItem = UIMenuItem(title: "Copy", action: #selector(labelMenuCopyTapped))
+        UIMenuController.shared.menuItems = [copyItem]
+        UIMenuController.shared.arrowDirection = .up
+        UIMenuController.shared.setTargetRect(senderView.frame, in: superView)
+        UIMenuController.shared.setMenuVisible(true, animated: true)
+    }
+    
+    @objc func labelMenuCopyTapped() {
+        let text = label.text
+        UIPasteboard.general.string = text
+        label.resignFirstResponder()
     }
     
     @objc func playButtonTapped() {
