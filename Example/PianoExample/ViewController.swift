@@ -211,8 +211,12 @@ class ViewController: UIViewController {
     
     @objc func undoButtonTapped() {
         waitTextField.resignFirstResponder()
-        notesToPlay.removeLast()
-        notesToPlayAsStrings.removeLast()
+        if !notesToPlay.isEmpty {
+            notesToPlay.removeLast()
+        }
+        if !notesToPlayAsStrings.isEmpty {
+            notesToPlayAsStrings.removeLast()
+        }
         setPianoStringToNotes()
     }
     
@@ -222,7 +226,7 @@ class ViewController: UIViewController {
     }
     
     @objc func labelLongPressed(sender: UILongPressGestureRecognizer) {
-        guard sender.state == .began, let senderView = sender.view, let superView = sender.view?.superview else { return }
+        guard sender.state == .began && !notesToPlay.isEmpty, let senderView = sender.view, let superView = sender.view?.superview else { return }
         senderView.becomeFirstResponder()
         let copyItem = UIMenuItem(title: "Copy", action: #selector(labelMenuCopyTapped))
         UIMenuController.shared.menuItems = [copyItem]

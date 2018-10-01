@@ -70,7 +70,7 @@
                             <constraint firstItem="Z3c-N2-ow6" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fAd-0q-ad9"/>
                             <constraint firstItem="HIm-Ye-lBa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="iz5-dd-kzS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hyq-If-A8R" secondAttribute="trailing" constant="20" id="rFo-AP-YBA"/>
-                            <constraint firstItem="HIm-Ye-lBa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="yfL-rw-1eo"/>
+                            <constraint firstItem="HIm-Ye-lBa" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="yfL-rw-1eo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
