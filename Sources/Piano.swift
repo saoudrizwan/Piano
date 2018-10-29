@@ -323,9 +323,10 @@ public class Piano {
                 }
             }
             if let music = music {
-                let timer = Timer.scheduledTimer(withTimeInterval: pauseDurationBeforeNextNote, repeats: false, block: { (_) in
+                let timer = Timer(timeInterval: pauseDurationBeforeNextNote, repeats: false) { (_) in
                     music()
-                })
+                }
+                RunLoop.main.add(timer, forMode: .common)
                 Piano.default.timers.append(timer)
             }
         }
