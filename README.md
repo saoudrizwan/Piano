@@ -26,7 +26,7 @@ Piano is a **convenient** and **easy-to-use** wrapper around the `AVFoundation` 
 
 ## Compatibility
 
-Piano requires **iOS 10+** and is compatible with **Swift 4** projects.
+Piano requires **iOS 10+** and is compatible with **Swift 4.2** projects.
 
 ## Installation
 
@@ -37,7 +37,7 @@ platform :ios, '10.0'
 target 'ProjectName' do
 use_frameworks!
 
-    pod 'Piano', '~> 1.7'
+    pod 'Piano', '~> 1.8'
 
 end
 ```
@@ -48,7 +48,7 @@ end
  ```ruby
  github "saoudrizwan/Piano"
  ```
- *(make sure Xcode 9 is [set as your system's default Xcode](https://stackoverflow.com/a/28901378/3502608) before using CocoaPods or Carthage with Swift 4 frameworks)*
+ *(make sure Xcode 10 is [set as your system's default Xcode](https://stackoverflow.com/a/28901378/3502608) before using CocoaPods or Carthage with Swift 4 frameworks)*
 
 * Or embed the Piano framework into your project
 
