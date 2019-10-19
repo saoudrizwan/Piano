@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+	<a href="https://gitroyalty.com/saoudrizwan/Piano" target="_blank"><img src="https://img.shields.io/endpoint?url=https://gitroyalty.com/saoudrizwan/Piano/badge.json" alt="GitRoyalty" /></a>
     <img src="https://user-images.githubusercontent.com/7799382/30309920-bcdb85ec-9742-11e7-96fc-af8155f4712d.png" alt="Platform: iOS 10.0+" />
     <a href="https://developer.apple.com/swift" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/30309908-ace5d886-9742-11e7-85ea-8d4e5f2af2ac.png" alt="Language: Swift 4" /></a>
     <a href="https://cocoapods.org/pods/Piano" target="_blank"><img src="https://user-images.githubusercontent.com/7799382/33073452-cd78293e-ce77-11e7-8b39-8a1565616814.png" alt="CocoaPods compatible" /></a>
@@ -30,29 +31,11 @@ Piano requires **iOS 10+** and is compatible with **Swift 4.2** projects.
 
 ## Installation
 
-* Installation for <a href="https://guides.cocoapods.org/using/using-cocoapods.html" target="_blank">CocoaPods</a>:
+Support Piano's contributors with a monthly subscription on https://gitroyalty.com/saoudrizwan/Piano to install this package.
 
-```ruby
-platform :ios, '10.0'
-target 'ProjectName' do
-use_frameworks!
-
-    pod 'Piano', '~> 1.8'
-
-end
-```
-*(if you run into problems, `pod repo update` and try again)*
-
-* Installation for <a href="https://github.com/Carthage/Carthage" target="_blank">Carthage</a>:
-
- ```ruby
- github "saoudrizwan/Piano"
- ```
- *(make sure Xcode 10 is [set as your system's default Xcode](https://stackoverflow.com/a/28901378/3502608) before using CocoaPods or Carthage with Swift 4 frameworks)*
-
-* Or embed the Piano framework into your project
-
-And `import Piano` in the files you'd like to use it.
+[![Subscribe on GitRoyalty](https://gitroyalty.com/saoudrizwan/Piano/subscribe.svg)](https://gitroyalty.com/saoudrizwan/Piano)
+<br/>
+<sub>* comes with a 2 week free trial and can be cancelled anytime</sub>
 
 ## Usage
 
